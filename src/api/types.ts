@@ -30,6 +30,8 @@ export interface GuestOrderItem {
   productId: string
   name: string
   quantity: number
+  /** Units staff already delivered to the table (0..quantity). */
+  servedQuantity: number
   unitPrice: number
   notes: string | null
 }

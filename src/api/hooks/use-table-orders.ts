@@ -21,6 +21,8 @@ export function useTableOrders(qrToken: string | null) {
     queryFn: () => getTableOrders(qrToken!),
     enabled: !!qrToken,
     staleTime: 5_000,
+    // Staff mark items as served; poll until the backend can push to guests.
+    refetchInterval: 15_000,
   })
 }
 

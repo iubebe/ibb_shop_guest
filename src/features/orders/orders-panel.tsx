@@ -1,9 +1,16 @@
 import { useTableOrders } from '@/api/hooks/use-table-orders'
 import { formatPrice } from '@/features/menu/format-price'
 import { ORDER_STATUS_LABEL } from '@/features/orders/types'
+import { cn } from '@/lib/utils'
 import { useTableStore } from '@/stores/table-store'
 
 const timeFormat = new Intl.DateTimeFormat('vi-VN', { hour: '2-digit', minute: '2-digit' })
+
+function servedLabel(served: number, quantity: number) {
+  if (served >= quantity) return 'Đã phục vụ'
+  if (served === 0) return 'Chưa phục vụ'
+  return `Đã phục vụ ${served}/${quantity}`
+}
 
 export function OrdersPanel() {
   const qrToken = useTableStore((state) => state.qrToken)
@@ -37,8 +44,18 @@ export function OrdersPanel() {
               <li key={item.productId} className="flex justify-between gap-2">
                 <span>
                   {item.quantity} × {item.name}
+                  {order.status === 'confirmed' && (
+                    <span
+                      className={cn(
+                        'ml-2 rounded-full px-2 py-0.5 text-xs',
+                        item.servedQuantity >= item.quantity ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground',
+                      )}
+                    >
+                      {servedLabel(item.servedQuantity, item.quantity)}
+                    </span>
+                  )}
                 </span>
-                <span className="text-muted-foreground">{formatPrice(item.unitPrice * item.quantity)}</span>
+                <span className="shrink-0 text-muted-foreground">{formatPrice(item.unitPrice * item.quantity)}</span>
               </li>
             ))}
           </ul>
