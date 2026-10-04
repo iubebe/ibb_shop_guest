@@ -41,7 +41,7 @@ export const useCartStore = create<CartState>()(
         set((state) => ({ items: state.items.filter((i) => i.productId !== productId) })),
       clear: () => set({ items: [] }),
     }),
-    { name: 'ibb-guest-cart' },
+    { name: 'ibb-guest-cart-v2' },
   ),
 )
 

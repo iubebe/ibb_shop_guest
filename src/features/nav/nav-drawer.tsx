@@ -1,25 +1,26 @@
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
+import type { MenuCategory } from '@/api/types'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CartPanel } from '@/features/nav/cart-panel'
 import { CategoriesPanel } from '@/features/nav/categories-panel'
-import { TablePicker } from '@/features/nav/table-picker'
 import { OrdersPanel } from '@/features/orders/orders-panel'
 import { selectCartCount, useCartStore } from '@/stores/cart-store'
-import { useTableStore } from '@/stores/table-store'
 
 interface NavDrawerProps {
+  tableName: string
+  categories: MenuCategory[]
   selectedCategoryId: string
   onSelectCategory: (categoryId: string) => void
 }
 
 /** Right-side navigation: categories, cart, and orders of the current table. */
-export function NavDrawer({ selectedCategoryId, onSelectCategory }: NavDrawerProps) {
+export function NavDrawer({ tableName, categories, selectedCategoryId, onSelectCategory }: NavDrawerProps) {
   const [open, setOpen] = useState(false)
   const cartCount = useCartStore(selectCartCount)
-  const tableId = useTableStore((state) => state.tableId)
+  const [tab, setTab] = useState('categories')
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -37,12 +38,11 @@ export function NavDrawer({ selectedCategoryId, onSelectCategory }: NavDrawerPro
       </SheetTrigger>
       <SheetContent side="right" className="w-[88%] max-w-sm overflow-y-auto pb-[env(safe-area-inset-bottom)]">
         <SheetHeader>
-          <SheetTitle className="text-lg">{tableId ? `Bàn ${tableId}` : 'Quán Cuốn 3 Miền'}</SheetTitle>
-          <SheetDescription>Danh mục, giỏ hàng và đơn hàng</SheetDescription>
+          <SheetTitle className="text-lg">Quán Cuốn 3 Miền</SheetTitle>
+          <SheetDescription>{tableName} · Danh mục, giỏ hàng và đơn hàng</SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 px-4 pb-4">
-          <TablePicker />
-          <Tabs defaultValue="categories">
+          <Tabs value={tab} onValueChange={(value) => setTab(String(value))}>
             <TabsList className="w-full gap-2">
               <TabsTrigger value="categories" className="min-h-5">Danh mục</TabsTrigger>
               <TabsTrigger value="cart" className="min-h-5">Giỏ hàng</TabsTrigger>
@@ -50,6 +50,7 @@ export function NavDrawer({ selectedCategoryId, onSelectCategory }: NavDrawerPro
             </TabsList>
             <TabsContent value="categories">
               <CategoriesPanel
+                categories={categories}
                 selectedId={selectedCategoryId}
                 onSelect={(id) => {
                   onSelectCategory(id)
@@ -58,7 +59,7 @@ export function NavDrawer({ selectedCategoryId, onSelectCategory }: NavDrawerPro
               />
             </TabsContent>
             <TabsContent value="cart">
-              <CartPanel />
+              <CartPanel onOrdered={() => setTab('orders')} />
             </TabsContent>
             <TabsContent value="orders">
               <OrdersPanel />
