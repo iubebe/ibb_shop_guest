@@ -1,15 +1,18 @@
+import type { MenuCategory } from '@/api/types'
+import { ALL_CATEGORY_ID } from '@/features/menu/constants'
 import { cn } from '@/lib/utils'
-import { MENU_CATEGORIES } from '@/features/menu/data/categories'
 
 interface CategoriesPanelProps {
+  categories: MenuCategory[]
   selectedId: string
   onSelect: (categoryId: string) => void
 }
 
-export function CategoriesPanel({ selectedId, onSelect }: CategoriesPanelProps) {
+export function CategoriesPanel({ categories, selectedId, onSelect }: CategoriesPanelProps) {
+  const all = [{ id: ALL_CATEGORY_ID, name: 'Tất cả' }, ...categories]
   return (
     <ul className="flex flex-col gap-2">
-      {MENU_CATEGORIES.map((category) => (
+      {all.map((category) => (
         <li key={category.id}>
           <button
             type="button"

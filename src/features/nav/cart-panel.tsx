@@ -1,9 +1,14 @@
 import { Minus, Plus } from 'lucide-react'
+import { usePlaceOrder } from '@/api/hooks/use-table-orders'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/features/menu/format-price'
 import { selectCartTotal, useCartStore } from '@/stores/cart-store'
+import { useTableStore } from '@/stores/table-store'
 
-export function CartPanel() {
+export function CartPanel({ onOrdered }: { onOrdered: () => void }) {
+  const qrToken = useTableStore((state) => state.qrToken)
+  const placeOrder = usePlaceOrder(qrToken)
+  const clear = useCartStore((state) => state.clear)
   const items = useCartStore((state) => state.items)
   const total = useCartStore(selectCartTotal)
   const setQuantity = useCartStore((state) => state.setQuantity)
@@ -47,6 +52,28 @@ export function CartPanel() {
         <span>Tạm tính</span>
         <span className="text-lg font-semibold">{formatPrice(total)}</span>
       </div>
+      {placeOrder.isError && (
+        <p role="alert" className="text-sm text-destructive">
+          Đặt món không thành công: {placeOrder.error.message}
+        </p>
+      )}
+      <Button
+        className="min-h-11 w-full text-base"
+        disabled={placeOrder.isPending}
+        onClick={() =>
+          placeOrder.mutate(
+            { items: items.map((i) => ({ productId: i.productId, quantity: i.quantity })) },
+            {
+              onSuccess: () => {
+                clear()
+                onOrdered()
+              },
+            },
+          )
+        }
+      >
+        {placeOrder.isPending ? 'Đang gửi...' : 'Đặt món'}
+      </Button>
     </div>
   )
 }
