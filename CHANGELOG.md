@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.0.0...ibb_shop_guest-v1.1.0) (2026-10-19)
+
+
+### Features
+
+* menu branch ([#4](https://github.com/iubebe/ibb_shop_guest/issues/4)) ([b53a407](https://github.com/iubebe/ibb_shop_guest/commit/b53a407bc23baed6e336b4ef620391896844f5a6))
+
 ## 1.0.0 (2026-10-05)
 
 
