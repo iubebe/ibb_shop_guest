@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.1.0...ibb_shop_guest-v1.2.0) (2026-10-19)
+
+
+### Features
+
+* runtime env ([509b02c](https://github.com/iubebe/ibb_shop_guest/commit/509b02cc007e2fae758a514ccb82154bfd5d26ef))
+* runtime env ([bfdbe95](https://github.com/iubebe/ibb_shop_guest/commit/bfdbe95530cd17dddbdb0a8a308b2aff514ebb2d))
+* runtime env ([02acc64](https://github.com/iubebe/ibb_shop_guest/commit/02acc64c3bf8b56a00ebcb0411966b54a6a947b3))
+
 ## [1.1.0](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.0.0...ibb_shop_guest-v1.1.0) (2026-10-19)
 
 
