@@ -20,6 +20,8 @@ export interface MenuProduct {
 }
 
 export interface GuestMenu {
+  /** Shop name set by the admin; may be empty. */
+  shopName: string
   categories: MenuCategory[]
   products: MenuProduct[]
 }

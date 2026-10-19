@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useMenu } from '@/api/hooks/use-menu'
 import { useTable } from '@/api/hooks/use-table'
 import { Button } from '@/components/ui/button'
@@ -7,12 +7,22 @@ import { ALL_CATEGORY_ID } from '@/features/menu/constants'
 import { NavDrawer } from '@/features/nav/nav-drawer'
 import { useTableStore } from '@/stores/table-store'
 
-function PageShell({ subtitle, nav, children }: { subtitle: string; nav?: ReactNode; children: ReactNode }) {
+function PageShell({
+  title = 'Thực đơn',
+  subtitle,
+  nav,
+  children,
+}: {
+  title?: string
+  subtitle: string
+  nav?: ReactNode
+  children: ReactNode
+}) {
   return (
     <main className="mx-auto min-h-svh w-full max-w-md px-4 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
       <header className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold">Thực đơn</h1>
+          <h1 className="text-2xl font-semibold">{title}</h1>
           <p className="text-sm text-muted-foreground">{subtitle}</p>
         </div>
         {nav}
@@ -47,6 +57,11 @@ export function MenuPage() {
   const qrToken = useTableStore((state) => state.qrToken)
   const table = useTable(qrToken)
   const menu = useMenu(table.data ? qrToken : null)
+  const shopName = menu.data?.shopName
+
+  useEffect(() => {
+    if (shopName) document.title = shopName
+  }, [shopName])
 
   if (!qrToken) {
     return (
@@ -91,6 +106,7 @@ export function MenuPage() {
 
   return (
     <PageShell
+      title={shopName || undefined}
       subtitle={`${table.data.name} · ${category?.name ?? 'Tất cả'}`}
       nav={
         <NavDrawer
