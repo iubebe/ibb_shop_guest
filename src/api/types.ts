@@ -48,5 +48,9 @@ export interface GuestOrder {
 }
 
 export interface CreateOrderInput {
+  /** Optional; the shop links it to a customer when staff confirm the order. */
+  customerName?: string
+  customerPhone?: string
+  customerAddress?: string
   items: { productId: string; quantity: number; notes?: string }[]
 }

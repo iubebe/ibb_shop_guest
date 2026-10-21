@@ -35,7 +35,11 @@ export function localEnvPlugin(): Plugin {
         const env = loadEnv(mode, envDir, '')
         if (!keys.some((key) => env[key])) return next()
 
-        const body = template.replace(/\$\{([A-Z0-9_]+)\}/g, (_, key: string) => env[key] ?? '')
+        // A phone opening the dev server by LAN IP cannot reach the dev machine's "localhost".
+        const host = req.headers.host?.replace(/:\d+$/, '')
+        const body = template
+          .replace(/\$\{([A-Z0-9_]+)\}/g, (_, key: string) => env[key] ?? '')
+          .replace(/\/\/localhost(?=[:/])/g, host ? `//${host}` : '//localhost')
         res.setHeader('Content-Type', 'application/javascript')
         res.setHeader('Cache-Control', 'no-store')
         res.end(body)
