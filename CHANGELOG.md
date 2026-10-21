@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.2.0...ibb_shop_guest-v1.2.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* branch name ([e5299ff](https://github.com/iubebe/ibb_shop_guest/commit/e5299ff7906439d554504f5899811f93628dc0a5))
+
 ## [1.2.0](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.1.0...ibb_shop_guest-v1.2.0) (2026-10-19)
 
 

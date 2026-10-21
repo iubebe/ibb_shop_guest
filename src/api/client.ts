@@ -1,4 +1,5 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios'
+import { API_ROUTES } from '@/api/routes'
 import { env } from '@/config/env'
 
 const CSRF_HEADER = 'X-CSRF-Token'
@@ -40,7 +41,7 @@ function loadCsrfToken() {
 }
 
 apiClient.interceptors.request.use(async (config) => {
-  if (!SAFE_METHODS.has((config.method ?? 'get').toLowerCase())) {
+  if (!SAFE_METHODS.has((config.method ?? 'get').toLowerCase()) || config.url === API_ROUTES.publicBranch) {
     config.headers.set(CSRF_HEADER, await loadCsrfToken())
   }
   return config
