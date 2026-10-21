@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.2.1...ibb_shop_guest-v1.3.0) (2026-10-21)
+
+
+### Features
+
+* customer info ([7e612cc](https://github.com/iubebe/ibb_shop_guest/commit/7e612ccbdfa98fea668321c7cca4dee372480cba))
+* customer info ([37b4736](https://github.com/iubebe/ibb_shop_guest/commit/37b473675a25d65ebaa90c8152badf0a0ac91d7f))
+
 ## [1.2.1](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.2.0...ibb_shop_guest-v1.2.1) (2026-10-19)
 
 
