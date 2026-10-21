@@ -1,7 +1,7 @@
 {
   "name": "ibb_shop_guest",
   "private": true,
-  "version": "1.2.1",
+  "version": "1.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
