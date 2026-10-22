@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.3.0...ibb_shop_guest-v1.3.1) (2026-10-22)
+
+
+### Bug Fixes
+
+* cva security ([d42bb8c](https://github.com/iubebe/ibb_shop_guest/commit/d42bb8ccc545c116cdb07d3c041e1349c02da00a))
+
 ## [1.3.0](https://github.com/iubebe/ibb_shop_guest/compare/ibb_shop_guest-v1.2.1...ibb_shop_guest-v1.3.0) (2026-10-21)
 
 
